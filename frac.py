@@ -1,11 +1,15 @@
 
 def factors(n):
+    """returns a list of the factors of n"""
     return [i for i in range(1,n+1) if n % i == 0] 
 
 class frac:
+    """
+    fraction class to represent fractions 
+    """
     def __init__(self, x, y):
-        self.num = x
-        self.denom  = y
+        self.num = x            ##numerator
+        self.denom  = y         ##denominator
 
     def __repr__(self):
         return "{}/{}".format(self.num, self.denom)
@@ -14,14 +18,17 @@ class frac:
         return self.__repr__()
 
     def simplify(self):
+        """
+        returns a simplified fraction with num and denom reduced
+        """
         if self.num % self.denom == 0:
             return int(self.num / self.denom)
         
         else:
-            num_factors = factors(self.num)
-            denom_factors = factors(self.denom)
-            highest_fact = max(set(num_factors) & set(denom_factors))
-            return frac(self.num / highest_fact, self.denom / highest_fact)
+            num_factors = factors(self.num)                                 ##numerator factors
+            denom_factors = factors(self.denom)                             ##denominator factors
+            highest_fact = max(set(num_factors) & set(denom_factors))       ##find HCF of num and denom
+            return frac(self.num / highest_fact, self.denom / highest_fact) ##return reduced fraction
     
     def __add__(self, other):
         top     = (self.num*other.denom) + (other.num*self.denom)
