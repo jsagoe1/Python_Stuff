@@ -8,7 +8,7 @@ from google.auth.transport.requests import Request
 
 class auth:
     """
-    Class for loggin into Google drive
+    Class for logging into Google drive
     """
     def __init__(self, SCOPES, SECRET_FILE, APPLICATION_NAME):
         self.__SCOPES = SCOPES
