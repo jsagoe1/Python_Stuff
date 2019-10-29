@@ -1,4 +1,3 @@
-
 from __future__ import print_function
 import pickle
 import os.path
@@ -33,26 +32,29 @@ class gDrive:
             key: item_name
             value: item_ID
         """
+        try:
+            if itemType == 'all':
+                elements = drive_service.files().list(pageSize=num, q="'me' in owners").execute()
+            elif itemType == 'files':
+                elements = drive_service.files().list(pageSize=num,
+                                                      q=r"mimeType!='application/vnd.google-apps.folder' and 'me' in owners and trashed=false").execute()
+                                                      
+            elif itemType == 'folders':
+                elements = drive_service.files().list(pageSize=num, 
+                                               q=r"mimeType='application/vnd.google-apps.folder' and 'me' in owners and trashed=false").execute()
+                                               
+            items = elements.get('files', [])
+            
+            if not items:
+                return None
+            else:
+                item_list = {}
+                for item in items:
+                    item_list[u'{}'.format(item['name'])] = [u'{}'.format(item['id'])]
+                return item_list
         
-        if itemType == 'all':
-            elements = drive_service.files().list(pageSize=num, q="'me' in owners").execute()
-        elif itemType == 'files':
-            elements = drive_service.files().list(pageSize=num,
-                                                  q=r"mimeType!='application/vnd.google-apps.folder' and 'me' in owners and trashed=false").execute()
-                                                  
-        elif itemType == 'folders':
-            elements = drive_service.files().list(pageSize=num, 
-                                           q=r"mimeType='application/vnd.google-apps.folder' and 'me' in owners and trashed=false").execute()
-                                           
-        items = elements.get('files', [])
-        
-        if not items:
-            return None
-        else:
-            item_list = {}
-            for item in items:
-                item_list[u'{}'.format(item['name'])] = [u'{}'.format(item['id'])]
-            return item_list
+        except:
+            print("ParameterError: Please Check the parameters\n")
             
             
     def listItemsinFolder(self, folderName='root', num=1000, itemType='all'):
