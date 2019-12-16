@@ -20,11 +20,11 @@ class LinkedList:
     def get_node_at_index(self, index):
 	if index < 0 or index >= self.length:
             raise IndexError("ERROR: index less than 0 or greater than length")
-
+        
         prev_node = self.head.next
 	for _ in range(index):
             prev_node = prev_node.next
-	return prev_node
+        return prev_node
 
     def insert(self, index, value):
         # Inserts a new node at index 'index' containing data 'data'.
