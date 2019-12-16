@@ -18,11 +18,11 @@ class LinkedList:
         self.length += 1
 
     def get_node_at_index(self, index):
-	if index < 0 or index >= self.length:
+        if index < 0 or index >= self.length:
             raise IndexError("ERROR: index less than 0 or greater than length")
         
         prev_node = self.head.next
-	for _ in range(index):
+        for _ in range(index):
             prev_node = prev_node.next
         return prev_node
 
@@ -35,7 +35,7 @@ class LinkedList:
 	
         prev_node = get_node_at_index(index)
         new_node = Node(value)
-	new_node.next = prev_node.next
+        new_node.next = prev_node.next
         prev_node.next = new_node
         self.length += 1
 		
@@ -43,16 +43,16 @@ class LinkedList:
         # Deletes the node at index 'index'.
         if index >= self.length or index < 0: # added 'index < 0' post-video
             raise IndexError("'Erase' Index (%d) out of range for a list of size %d!" % (index, self.length))
-	if index == 0:
-	    prev_node = self.head
-	    cur_node = prev_node.next
+        if index == 0:
+	        prev_node = self.head
+            cur_node = prev_node.next
             prev_node.next = cur_node.next
             self.length -= 1
             return
 
         prev_node = get_node_at_index(index - 1)
-	cur_node = prev_node.next
-	prev_node.next = cur_node.next
+        cur_node = prev_node.next
+        prev_node.next = cur_node.next
         self.length -= 1
 
     def display(self):
@@ -84,9 +84,8 @@ class LinkedList:
         # Indices begin at 0. If the 'index' is greater than or equal 
         # to the length of the linked list a warning will be printed 
         # to the user.
-	get_node_at_index(index).value = value
-        
-    	
+        get_node_at_index(index).value = value
+
 ls = LinkedList()
 
 vals = [2, 5, 9, 7, 8, 1]
