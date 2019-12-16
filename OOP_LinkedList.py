@@ -30,13 +30,13 @@ class LinkedList:
         prev_node = self.head
         cur_node = self.head.next
 		
-		for _ in range(index-1):
-			prev_node = prev_node.next
+	    for _ in range(index-1):
+		    prev_node = prev_node.next
             cur_node = cur_node.next
 			
-		new_node = Node(value)
-		prev_node.next = new_node
-		new_node.next = cur_node
+	    new_node = Node(value)
+	    prev_node.next = new_node
+	    new_node.next = cur_node
         self.length += 1
 		
     def erase(self, index):
@@ -44,7 +44,6 @@ class LinkedList:
         if index >= self.length or index < 0: # added 'index<0' post-video
             print("ERROR: 'Erase' Index out of range!")
             return
-        idx = 0
         cur_node = self.head.next
         prev_node = self.head
         
@@ -73,7 +72,7 @@ class LinkedList:
         while cur_node.next != None:
             l_len += 1
             cur_node = cur_node.next
-		assert l_len == self.length
+	    assert l_len == self.length
         return l_len
     
     def get(self, index):
