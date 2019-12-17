@@ -44,7 +44,7 @@ class LinkedList:
         if index >= self.length or index < 0: # added 'index < 0' post-video
             raise IndexError("'Erase' Index (%d) out of range for a list of size %d!" % (index, self.length))
         if index == 0:
-	        prev_node = self.head
+            prev_node = self.head
             cur_node = prev_node.next
             prev_node.next = cur_node.next
             self.length -= 1
