@@ -17,7 +17,8 @@ def perm1(s):
     perms = findPerms(lst)
     return ["".join(word) for word in perms]
      
-
+## perm2 uses yield instead of a list so uses almost no 
+## memory at all
 def perm2(s):
     lst = list(s)
     def findPerms(lst):  
