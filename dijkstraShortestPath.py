@@ -20,8 +20,8 @@ def dijkstra(graph, start, goal):
     if start in graph and start == goal:
         return ([start], 0)
     # check if start or goal not present in graph
-    if start not in graph or goal not in graph:
-        print("Error:'start' or 'goal' not present in graph")
+    if start not in graph:
+        print("Error:'start' not present in graph")
         return ([],0)
         
     infinity = float("inf")         #Infinity
@@ -63,13 +63,12 @@ def dijkstra(graph, start, goal):
     path = []                       # to trace path
     cur = goal                      # start from goal and trace back
     while cur!=None:
-        if cur not in prevVertex:   #no path from goal to start
+        if cur not in prevVertex:   #no path from start to goal
+            print("No path from start to goal")
             return ([], 0)
-            
         path.insert(0,cur)
         cur = prevVertex[cur]
     return (path, shortestDistanceFromStart[goal])
     
-            
     
-print(dijkstra(graph, 'a', 'g'))
+print(dijkstra(graph, 'a', 'h'))
