@@ -6,7 +6,7 @@ graph = {
 
 'a':{'b':3,'c':4, 'd':7},
 'b':{'c':1,'f':5},
-'c':{'f':6,'d':2},
+'c':{'f':3,'d':2},
 'd':{'e':3, 'g':6},
 'e':{'g':3, 'h':4},
 'f':{'e':1, 'h':8},
@@ -16,9 +16,20 @@ graph = {
 
 
 def dijkstra(graph, start, goal):
-    infinity = 99999999999
+    # check if start is same as goal
+    if start in graph and start == goal:
+        return ([start], 0)
+    # check if start or goal not present in graph
+    if start not in graph or goal not in graph:
+        print("Error:'start' or 'goal' not present in graph")
+        return ([],0)
+        
+    infinity = float("inf")         #Infinity
     shortestDistanceFromStart = {}  # to hold shortest distance to each vertex
     prevVertex = {}                 # to keep track of vertices leading to curVertex
+        
+    unvisitedVertices = []          #to hold unvisited vertices as we go through graph
+    visited = []                    #to hold visited vertices as we go through grapgh
     
     #set all vertices to infinity initially to start with
     for vertex in graph:
@@ -26,44 +37,39 @@ def dijkstra(graph, start, goal):
     #except start vertex, set to 0
     shortestDistanceFromStart[start] = 0
     
-    unvisitedVertices = []            #to hold unvisited vertices as we go through graph
-    visited = []                      #to hold visited vertices as we go through grapgh
-    
-    prevVertex[start] = None          # start has no prev node
+    prevVertex[start] = None          # start has no prev node, so set to None
     unvisitedVertices.append(start)
     
     #repeat until unvisited is empty
     while unvisitedVertices != []:
-        #pop last element in Unvisited
+        #pop last element in Unvisited, removes last element from unvisited
         curVertex = unvisitedVertices.pop()
         #get connected vertices of curVertex
-        for buddy, weight in graph[curVertex].items():
-            #calculate distance from cur_vertex to buddy
+        for neighbour, weight in graph[curVertex].items():
+            #calculate distance from cur_vertex to neighbour
             distance  = shortestDistanceFromStart[curVertex] + weight
-            #update shortestdistance val if distance is less than stored
-            if distance < shortestDistanceFromStart[buddy]:
-                prevVertex[buddy] = curVertex
-                shortestDistanceFromStart[buddy] = distance
-            #add buddies to unvisited 
-            if buddy not in unvisitedVertices and curVertex not in visited:
-                unvisitedVertices.insert(0, buddy)
+            #update shortestdistance val if distance is less than stored distance
+            if distance < shortestDistanceFromStart[neighbour]:
+                shortestDistanceFromStart[neighbour] = distance
+                #also update leading vertex to curVertex with shortest distance
+                prevVertex[neighbour] = curVertex
+            #add neighbours to unvisited 
+            if neighbour not in unvisitedVertices and curVertex not in visited:
+                unvisitedVertices.append(neighbour)
         #add curVertex to visited
         visited.append(curVertex)
         
-    path = []               # to trace path
-    cur = goal              # start from goal and trace back
+    print(prevVertex)
+    path = []                       # to trace path
+    cur = goal                      # start from goal and trace back
     while cur!=None:
+        if cur not in prevVertex:   #no path from goal to start
+            return ([], 0)
+            
         path.insert(0,cur)
         cur = prevVertex[cur]
-    if path[0] == start:
-        return "-->".join(path) + " distance=" + str(shortestDistanceFromStart[goal])
-    return []
+    return (path, shortestDistanceFromStart[goal])
     
             
-                
-            
     
-print(dijkstra(graph, 'a', 'h'))
-
-#output
-#a-->c-->d-->e-->h distance=13
+print(dijkstra(graph, 'a', 'g'))
