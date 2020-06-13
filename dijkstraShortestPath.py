@@ -1,6 +1,6 @@
 
 # =============================================================================
-# Graph implemented as adjency list with dictionay
+# Graph implemented as adjacency list with dictionay
 # =============================================================================
 graph = {
 
