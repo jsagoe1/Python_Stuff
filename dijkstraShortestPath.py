@@ -19,7 +19,7 @@ def dijkstra(graph, start, goal):
     # check if start is same as goal
     if start in graph and start == goal:
         return ([start], 0)
-    # check if start or goal not present in graph
+    # check if start not present in graph
     if start not in graph:
         print("Error:'start' not present in graph")
         return ([],0)
