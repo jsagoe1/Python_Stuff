@@ -1,20 +1,3 @@
-
-# =============================================================================
-# Graph implemented as adjacency list with dictionay
-# =============================================================================
-graph = {
-
-'a':{'b':3,'c':4, 'd':7},
-'b':{'c':1,'f':5},
-'c':{'f':3,'d':2},
-'d':{'e':3, 'g':6},
-'e':{'g':3, 'h':4},
-'f':{'e':1, 'h':8},
-'g':{'h':2},
-'h':{'g':2}
-}
-
-
 def dijkstra(graph, start, goal):
     # check if start is same as goal
     if start in graph and start == goal:
@@ -38,7 +21,7 @@ def dijkstra(graph, start, goal):
     shortestDistanceFromStart[start] = 0
     
     prevVertex[start] = None          # start has no prev node, so set to None
-    unvisitedVertices.append(start)
+    unvisitedVertices.insert(0,start)
     
     #repeat until unvisited is empty
     while unvisitedVertices != []:
@@ -55,11 +38,10 @@ def dijkstra(graph, start, goal):
                 prevVertex[neighbour] = curVertex
             #add neighbours to unvisited 
             if neighbour not in unvisitedVertices and curVertex not in visited:
-                unvisitedVertices.append(neighbour)
+                unvisitedVertices.insert(0, neighbour)
         #add curVertex to visited
         visited.append(curVertex)
         
-    print(prevVertex)
     path = []                       # to trace path
     cur = goal                      # start from goal and trace back
     while cur!=None:
@@ -69,6 +51,3 @@ def dijkstra(graph, start, goal):
         path.insert(0,cur)
         cur = prevVertex[cur]
     return (path, shortestDistanceFromStart[goal])
-    
-    
-print(dijkstra(graph, 'a', 'h'))
