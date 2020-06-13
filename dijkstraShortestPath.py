@@ -39,7 +39,7 @@ def dijkstra(graph, start, goal):
         #get connected vertices of curVertex
         for buddy, weight in graph[curVertex].items():
             #calculate distance from cur_vertex to buddy
-            distance  = shortestDistanceFromStart[curVertex] + graph[curVertex][buddy]
+            distance  = shortestDistanceFromStart[curVertex] + weight
             #update shortestdistance val if distance is less than stored
             if distance < shortestDistanceFromStart[buddy]:
                 prevVertex[buddy] = curVertex
