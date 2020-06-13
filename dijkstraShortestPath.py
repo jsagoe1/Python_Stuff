@@ -1,6 +1,6 @@
 
 # =============================================================================
-# Graph represented by adjacency dictionary
+# We will create a dictionary to represent the graph
 # =============================================================================
 graph = {
 
@@ -56,11 +56,14 @@ def dijkstra(graph, start, goal):
         path.insert(0,cur)
         cur = prevVertex[cur]
     if path[0] == start:
-        return "-->".join(path)
+        return "-->".join(path) + " distance=" + str(shortestDistanceFromStart[goal])
     return []
     
             
                 
             
     
-print(dijkstra(graph, 'b', 'h'))
+print(dijkstra(graph, 'a', 'h'))
+
+#output
+#a-->c-->d-->e-->h distance=13
