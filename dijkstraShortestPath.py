@@ -1,6 +1,6 @@
 
 # =============================================================================
-# We will create a dictionary to represent the graph
+# Graph implemented as adjency list with dictionay
 # =============================================================================
 graph = {
 
