@@ -51,7 +51,6 @@ def dijkstra(graph, start, goal):
     
     #repeat until unvisited is empty
     while unvisitedVertices != {}:
-        print(unvisitedVertices)
         #pop last element in Unvisited, removes last element from unvisited
         curVertex = min(unvisitedVertices, key=unvisitedVertices.get)
         del unvisitedVertices[curVertex]
