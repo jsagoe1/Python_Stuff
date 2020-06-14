@@ -12,7 +12,7 @@ graph = {
 
 
 
-def dijkstra_reddit(graph, start, goal):
+def dijkstra(graph, start, goal):
     def getPath(start, goal, prevVertex):
         path = []                       # to trace path
         cur = goal                      # start from goal and trace back
@@ -75,4 +75,4 @@ def dijkstra_reddit(graph, start, goal):
     
     
     
-print(dijkstra_reddit(graph, 'a', 'h'))
+print(dijkstra(graph, 'a', 'h'))
