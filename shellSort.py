@@ -6,17 +6,17 @@ def shellsort(ls):
         h = (3*h) + 1
         
     for gap in gaps:
-        print("gap:",gap)
         for i in range(gap,len(ls),gap):
             key = ls[i]
             for j in range(i-gap,-1,-gap):
                 if key < ls[j]:
                     ls[j],ls[j+gap] = ls[j+gap],ls[j]
     return ls
-                
-
-    
+               
 def generateIntList(size = 20, max = 100):
+    if size>max:
+        print("ArgumentError in function 'generateIntList':'size' larger than 'max'")
+        return []
     import random
     ls = []
     while len(ls) != size:
@@ -27,5 +27,5 @@ def generateIntList(size = 20, max = 100):
 
 
 ls = generateIntList()
-print("ls:",ls,"\n")
-print("sorted ls:\t",shellsort(ls))
+print("list:",ls)
+print("sorted list:",shellsort(ls))
