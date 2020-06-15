@@ -43,6 +43,18 @@ def dijkstra_wikipedia(graph, start, goal):
  
  
 def dijkstra_self(graph, start, goal):
+    def getPath(start, goal, prevVertex):
+        path = []                       # to trace path
+        cur = goal                      # start from goal and trace back
+        while cur!=None:
+            if cur not in prevVertex:   #no path from start to goal
+                print("No path from start to goal")
+                return ([], 0)
+            path.insert(0,cur)
+            cur = prevVertex[cur]
+        return path   
+        
+    
     # check if start is same as goal
     if start in graph and start == goal:
         return ([start], 0)
@@ -55,7 +67,7 @@ def dijkstra_self(graph, start, goal):
     shortestDistanceFromStart = {}  # to hold shortest distance to each vertex
     prevVertex = {}                 # to keep track of vertices leading to curVertex
         
-    unvisitedVertices = []          #to hold unvisited vertices as we go through graph
+    unvisitedVertices = {}          #to hold unvisited vertices as we go through graph
     visited = []                    #to hold visited vertices as we go through grapgh
     
     #set all vertices to infinity initially to start with
@@ -65,12 +77,13 @@ def dijkstra_self(graph, start, goal):
     shortestDistanceFromStart[start] = 0
     
     prevVertex[start] = None          # start has no prev node, so set to None
-    unvisitedVertices.insert(0,start)
+    unvisitedVertices[start] = 0      # add start to unvisited
     
     #repeat until unvisited is empty
-    while unvisitedVertices != []:
+    while unvisitedVertices != {}:
         #pop last element in Unvisited, removes last element from unvisited
-        curVertex = unvisitedVertices.pop()
+        curVertex = min(unvisitedVertices, key=unvisitedVertices.get)
+        del unvisitedVertices[curVertex]
         #get connected vertices of curVertex
         for neighbour, weight in graph[curVertex].items():
             #calculate distance from cur_vertex to neighbour
@@ -82,18 +95,10 @@ def dijkstra_self(graph, start, goal):
                 prevVertex[neighbour] = curVertex
             #add neighbours to unvisited 
             if neighbour not in unvisitedVertices and curVertex not in visited:
-                unvisitedVertices.insert(0, neighbour)
+                unvisitedVertices[neighbour] = shortestDistanceFromStart[neighbour]
         #add curVertex to visited
         visited.append(curVertex)
-        
-    path = []                       # to trace path
-    cur = goal                      # start from goal and trace back
-    while cur!=None:
-        if cur not in prevVertex:   #no path from start to goal
-            print("No path from start to goal")
-            return ([], 0)
-        path.insert(0,cur)
-        cur = prevVertex[cur]
+    path = getPath(start,goal,prevVertex)
     return (path, shortestDistanceFromStart[goal])
  
  
