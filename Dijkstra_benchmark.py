@@ -124,7 +124,7 @@ def benchmark(label, f, graph, start, goal, n=100):
  
  
 if __name__ == "__main__":
-    for i in range(50):
+    for i in range(10):
         
         g, graph, start, goal = generate_problem(n_nodes=100, avg_degree=4)
         benchmark("Self    Impl", dijkstra_self, graph, start, goal)
