@@ -16,7 +16,7 @@ def shellsort(ls):
                 
 
     
-def generateIntList(size = 20, max = 1000):
+def generateIntList(size = 20, max = 100):
     import random
     ls = []
     while len(ls) != size:
