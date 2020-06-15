@@ -1,4 +1,4 @@
-def dijkstra_reddit(graph, start, goal):
+def dijkstra_self(graph, start, goal):
     #to get the path from start to goal
     def getPath(start, goal, prevVertex):
         path = []                       
