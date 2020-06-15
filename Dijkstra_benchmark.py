@@ -1,3 +1,5 @@
+## compare two different implemetations of Dijstra's shortest path
+## algorithm on graph represented by adjacency list
 
 from time import perf_counter_ns as pc
  
@@ -40,7 +42,7 @@ def dijkstra_wikipedia(graph, start, goal):
     return (path, dist[goal])
  
  
-def dijkstra_reddit(graph, start, goal):
+def dijkstra_self(graph, start, goal):
     # check if start is same as goal
     if start in graph and start == goal:
         return ([start], 0)
@@ -125,5 +127,5 @@ if __name__ == "__main__":
     for i in range(50):
         
         g, graph, start, goal = generate_problem(n_nodes=100, avg_degree=4)
-        benchmark("Reddit    Impl", dijkstra_reddit, graph, start, goal)
+        benchmark("Self    Impl", dijkstra_self, graph, start, goal)
         benchmark("Wikipedia Impl", dijkstra_wikipedia, graph, start, goal)
